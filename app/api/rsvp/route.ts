@@ -5,7 +5,7 @@ import { sendRsvpNotification } from "@/lib/email";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { name, attending, partySize, email, phone } = body;
+    const { name, attending, partySize, email, phone, song, advice } = body;
 
     if (!name || typeof attending !== "boolean" || !partySize) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
@@ -29,6 +29,8 @@ export async function POST(req: NextRequest) {
       partySize: Number(partySize),
       email: String(email || "").trim(),
       phone: String(phone || "").trim(),
+      song: String(song || "").trim(),
+      advice: String(advice || "").trim(),
       submittedAt,
     };
 

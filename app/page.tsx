@@ -8,6 +8,8 @@ export default function Home() {
   const [partySize, setPartySize] = useState(1);
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [song, setSong] = useState("");
+  const [advice, setAdvice] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -26,7 +28,7 @@ export default function Home() {
       const res = await fetch("/api/rsvp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, attending, partySize, email, phone }),
+        body: JSON.stringify({ name, attending, partySize, email, phone, song, advice }),
       });
       if (!res.ok) throw new Error("Submission failed");
       setSubmitted(true);
@@ -142,6 +144,32 @@ export default function Home() {
               </select>
             </div>
           )}
+
+          <div>
+            <label className="block text-sm text-gray-600 mb-1">
+              Song Request <span className="text-gray-400">(optional)</span>
+            </label>
+            <input
+              type="text"
+              value={song}
+              onChange={(e) => setSong(e.target.value)}
+              placeholder="What song will get you on the dance floor?"
+              className="w-full border-b border-gray-300 py-2 text-gray-800 outline-none focus:border-gray-800 bg-transparent"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm text-gray-600 mb-1">
+              Advice for the Couple <span className="text-gray-400">(optional)</span>
+            </label>
+            <textarea
+              value={advice}
+              onChange={(e) => setAdvice(e.target.value)}
+              placeholder="Best marriage advice you've got?"
+              rows={3}
+              className="w-full border-b border-gray-300 py-2 text-gray-800 outline-none focus:border-gray-800 bg-transparent resize-none"
+            />
+          </div>
 
           {error && <p className="text-red-500 text-sm">{error}</p>}
 

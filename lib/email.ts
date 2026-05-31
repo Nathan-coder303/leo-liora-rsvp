@@ -8,6 +8,8 @@ export async function sendRsvpNotification(data: {
   partySize: number;
   email: string;
   phone: string;
+  song: string;
+  advice: string;
   submittedAt: string;
 }) {
   const resend = new Resend(process.env.RESEND_API_KEY!);
@@ -24,6 +26,8 @@ export async function sendRsvpNotification(data: {
         <tr><td style="padding:8px;font-weight:bold">Party Size</td><td style="padding:8px">${data.partySize}</td></tr>
         <tr><td style="padding:8px;font-weight:bold">Email</td><td style="padding:8px">${data.email || "—"}</td></tr>
         <tr><td style="padding:8px;font-weight:bold">Phone</td><td style="padding:8px">${data.phone || "—"}</td></tr>
+        <tr><td style="padding:8px;font-weight:bold">Song Request</td><td style="padding:8px">${data.song || "—"}</td></tr>
+        <tr><td style="padding:8px;font-weight:bold">Advice</td><td style="padding:8px">${data.advice || "—"}</td></tr>
         <tr><td style="padding:8px;font-weight:bold">Submitted</td><td style="padding:8px">${data.submittedAt}</td></tr>
       </table>
     `,

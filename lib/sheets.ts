@@ -21,6 +21,8 @@ export async function appendRsvpRow(data: {
   partySize: number;
   email: string;
   phone: string;
+  song: string;
+  advice: string;
   submittedAt: string;
 }) {
   const auth = getAuth();
@@ -40,7 +42,7 @@ export async function appendRsvpRow(data: {
       range: "Sheet1!A1:F1",
       valueInputOption: "RAW",
       requestBody: {
-        values: [["Name", "Attending", "Party Size", "Email", "Phone", "Submitted At"]],
+        values: [["Name", "Attending", "Party Size", "Email", "Phone", "Song Request", "Advice", "Submitted At"]],
       },
     });
   }
@@ -49,7 +51,7 @@ export async function appendRsvpRow(data: {
   const nextRow = usedRows + 1;
   await sheets.spreadsheets.values.update({
     spreadsheetId: SPREADSHEET_ID,
-    range: `Sheet1!A${nextRow}:F${nextRow}`,
+    range: `Sheet1!A${nextRow}:H${nextRow}`,
     valueInputOption: "RAW",
     requestBody: {
       values: [[
@@ -58,6 +60,8 @@ export async function appendRsvpRow(data: {
         data.partySize,
         data.email,
         data.phone,
+        data.song,
+        data.advice,
         data.submittedAt,
       ]],
     },
