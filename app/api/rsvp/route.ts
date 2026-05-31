@@ -31,7 +31,8 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ success: true });
   } catch (err) {
-    console.error("RSVP error:", err);
-    return NextResponse.json({ error: "Failed to submit RSVP" }, { status: 500 });
+    const message = err instanceof Error ? err.message : String(err);
+    console.error("RSVP error:", message);
+    return NextResponse.json({ error: "Failed to submit RSVP", detail: message }, { status: 500 });
   }
 }
