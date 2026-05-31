@@ -27,7 +27,20 @@ export async function POST(req: NextRequest) {
       submittedAt,
     };
 
-    await Promise.all([appendRsvpRow(data), sendRsvpNotification(data)]);
+    try {
+      await appendRsvpRow(data);
+    } catch (sheetsErr) {
+      const msg = sheetsErr instanceof Error ? sheetsErr.message : String(sheetsErr);
+      console.error("Sheets error:", msg);
+      return NextResponse.json({ error: "Sheets failed", detail: msg }, { status: 500 });
+    }
+    try {
+      await sendRsvpNotification(data);
+    } catch (emailErr) {
+      const msg = emailErr instanceof Error ? emailErr.message : String(emailErr);
+      console.error("Email error:", msg);
+      return NextResponse.json({ error: "Email failed", detail: msg }, { status: 500 });
+    }
 
     return NextResponse.json({ success: true });
   } catch (err) {
