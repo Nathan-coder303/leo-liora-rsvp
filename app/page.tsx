@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Great_Vibes, Cormorant_Garamond } from "next/font/google";
 
 const script = Great_Vibes({ weight: "400", subsets: ["latin"] });
@@ -77,6 +77,23 @@ export default function Home() {
   const registryRef = useRef<HTMLDivElement>(null);
   const faqRef      = useRef<HTMLDivElement>(null);
   const rsvpRef     = useRef<HTMLDivElement>(null);
+  const audioRef    = useRef<HTMLAudioElement | null>(null);
+  const [muted, setMuted] = useState(false);
+
+  useEffect(() => {
+    const audio = new Audio();
+    audio.loop = true;
+    audio.volume = 0.5;
+    audioRef.current = audio;
+    fetch("https://itunes.apple.com/lookup?id=1885844177")
+      .then(r => r.json())
+      .then(data => {
+        const url = data.results?.[0]?.previewUrl;
+        if (url && audioRef.current) audioRef.current.src = url;
+      })
+      .catch(() => {});
+    return () => { audio.pause(); audio.src = ""; };
+  }, []);
 
   function scrollTo(ref: React.RefObject<HTMLDivElement>) {
     ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -85,8 +102,15 @@ export default function Home() {
   function openEnvelope() {
     if (phase !== "closed") return;
     setPhase("opening");
+    audioRef.current?.play().catch(() => {});
     setTimeout(() => setCardVisible(true), 900);
     setTimeout(() => setPhase("open"), 1800);
+  }
+
+  function toggleMute() {
+    if (!audioRef.current) return;
+    audioRef.current.muted = !audioRef.current.muted;
+    setMuted(m => !m);
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -264,21 +288,23 @@ export default function Home() {
         )}
       </div>
 
-      {/* ── APPLE MUSIC PLAYER ── */}
+      {/* ── FLOATING MUSIC CONTROL ── */}
       {cardVisible && (
-        <div className="fade-up" style={{ width:"min(580px,92vw)", marginTop:"1.5rem", animationDelay:"0.6s" }}>
-          <p style={{ textAlign:"center", color:TAUPE, fontVariant:"small-caps", fontSize:"0.72rem", letterSpacing:"0.12em", marginBottom:"0.75rem" }}>
-            ✦ &nbsp; Our Song &nbsp; ✦
-          </p>
-          <iframe
-            allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
-            frameBorder="0"
-            height="175"
-            style={{ width:"100%", overflow:"hidden", borderRadius:0, border:`1px solid ${TAUPE_LIGHT}` }}
-            sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
-            src="https://embed.music.apple.com/us/album/1885844174?i=1885844177"
-          />
-        </div>
+        <button
+          onClick={toggleMute}
+          title={muted ? "Unmute music" : "Mute music"}
+          style={{
+            position: "fixed", bottom: "1.5rem", right: "1.5rem", zIndex: 200,
+            width: 44, height: 44, borderRadius: "50%",
+            backgroundColor: TAUPE, color: CREAM, border: "none",
+            cursor: "pointer", fontSize: "1.15rem",
+            boxShadow: "0 4px 14px rgba(0,0,0,0.2)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            transition: "background-color 0.2s",
+          }}
+        >
+          {muted ? "🔇" : "🎵"}
+        </button>
       )}
 
       {/* ── WEDDING WEBSITE SECTIONS ── */}
