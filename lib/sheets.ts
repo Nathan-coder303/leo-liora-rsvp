@@ -19,41 +19,42 @@ export async function appendRsvpRow(data: {
   name: string;
   attending: boolean;
   partySize: number;
+  email: string;
+  phone: string;
   submittedAt: string;
 }) {
   const auth = getAuth();
   const sheets = google.sheets({ version: "v4", auth });
 
-  // Ensure header row exists
   const existing = await sheets.spreadsheets.values.get({
     spreadsheetId: SPREADSHEET_ID,
-    range: "Sheet1!A1:D1",
+    range: "Sheet1!A1:F1",
   });
 
   if (!existing.data.values?.length) {
     await sheets.spreadsheets.values.update({
       spreadsheetId: SPREADSHEET_ID,
-      range: "Sheet1!A1:D1",
+      range: "Sheet1!A1:F1",
       valueInputOption: "RAW",
       requestBody: {
-        values: [["Name", "Attending", "Party Size", "Submitted At"]],
+        values: [["Name", "Attending", "Party Size", "Email", "Phone", "Submitted At"]],
       },
     });
   }
 
   await sheets.spreadsheets.values.append({
     spreadsheetId: SPREADSHEET_ID,
-    range: "Sheet1!A:D",
+    range: "Sheet1!A:F",
     valueInputOption: "RAW",
     requestBody: {
-      values: [
-        [
-          data.name,
-          data.attending ? "Yes" : "No",
-          data.partySize,
-          data.submittedAt,
-        ],
-      ],
+      values: [[
+        data.name,
+        data.attending ? "Yes" : "No",
+        data.partySize,
+        data.email,
+        data.phone,
+        data.submittedAt,
+      ]],
     },
   });
 }

@@ -5,10 +5,13 @@ import { sendRsvpNotification } from "@/lib/email";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { name, attending, partySize } = body;
+    const { name, attending, partySize, email, phone } = body;
 
     if (!name || typeof attending !== "boolean" || !partySize) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+    }
+    if (!email?.trim() && !phone?.trim()) {
+      return NextResponse.json({ error: "Email or phone is required" }, { status: 400 });
     }
     if (attending && (partySize < 1 || partySize > 2)) {
       return NextResponse.json({ error: "Party size must be 1 or 2" }, { status: 400 });
@@ -24,6 +27,8 @@ export async function POST(req: NextRequest) {
       name: String(name).trim(),
       attending: Boolean(attending),
       partySize: Number(partySize),
+      email: String(email || "").trim(),
+      phone: String(phone || "").trim(),
       submittedAt,
     };
 

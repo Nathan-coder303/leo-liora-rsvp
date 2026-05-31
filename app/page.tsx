@@ -6,6 +6,8 @@ export default function Home() {
   const [attending, setAttending] = useState<boolean | null>(null);
   const [name, setName] = useState("");
   const [partySize, setPartySize] = useState(1);
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -13,6 +15,10 @@ export default function Home() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!name.trim() || attending === null) return;
+    if (!email.trim() && !phone.trim()) {
+      setError("Please provide at least an email or phone number.");
+      return;
+    }
     setLoading(true);
     setError("");
 
@@ -20,7 +26,7 @@ export default function Home() {
       const res = await fetch("/api/rsvp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, attending, partySize }),
+        body: JSON.stringify({ name, attending, partySize, email, phone }),
       });
       if (!res.ok) throw new Error("Submission failed");
       setSubmitted(true);
@@ -96,6 +102,32 @@ export default function Home() {
             </div>
           </div>
 
+          <div>
+            <label className="block text-sm text-gray-600 mb-1">
+              Email <span className="text-gray-400">(at least one required)</span>
+            </label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="your@email.com"
+              className="w-full border-b border-gray-300 py-2 text-gray-800 outline-none focus:border-gray-800 bg-transparent"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm text-gray-600 mb-1">
+              Cell Phone <span className="text-gray-400">(at least one required)</span>
+            </label>
+            <input
+              type="tel"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder="(555) 000-0000"
+              className="w-full border-b border-gray-300 py-2 text-gray-800 outline-none focus:border-gray-800 bg-transparent"
+            />
+          </div>
+
           {attending && (
             <div>
               <label className="block text-sm text-gray-600 mb-1">Number of Guests (including yourself)</label>
@@ -115,7 +147,7 @@ export default function Home() {
 
           <button
             type="submit"
-            disabled={loading || attending === null || !name.trim()}
+            disabled={loading || attending === null || !name.trim() || (!email.trim() && !phone.trim())}
             className="w-full py-3 bg-gray-800 text-white text-sm tracking-wide disabled:opacity-40 hover:bg-gray-700 transition-colors"
           >
             {loading ? "Sending..." : "Submit RSVP"}
