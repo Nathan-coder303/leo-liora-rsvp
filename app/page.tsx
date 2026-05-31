@@ -104,7 +104,7 @@ export default function Home() {
 
           <div>
             <label className="block text-sm text-gray-600 mb-1">
-              Email <span className="text-gray-400">(at least one required)</span>
+              Email <span className="text-gray-400">(at least one required for reminders)</span>
             </label>
             <input
               type="email"
@@ -117,7 +117,7 @@ export default function Home() {
 
           <div>
             <label className="block text-sm text-gray-600 mb-1">
-              Cell Phone <span className="text-gray-400">(at least one required)</span>
+              Cell Phone <span className="text-gray-400">(at least one required for reminders)</span>
             </label>
             <input
               type="tel"

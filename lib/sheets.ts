@@ -26,12 +26,15 @@ export async function appendRsvpRow(data: {
   const auth = getAuth();
   const sheets = google.sheets({ version: "v4", auth });
 
-  const existing = await sheets.spreadsheets.values.get({
+  // Write header row if sheet is empty
+  const colA = await sheets.spreadsheets.values.get({
     spreadsheetId: SPREADSHEET_ID,
-    range: "Sheet1!A1:F1",
+    range: "Sheet1!A:A",
   });
 
-  if (!existing.data.values?.length) {
+  const usedRows = colA.data.values?.length || 0;
+
+  if (usedRows === 0) {
     await sheets.spreadsheets.values.update({
       spreadsheetId: SPREADSHEET_ID,
       range: "Sheet1!A1:F1",
@@ -42,9 +45,11 @@ export async function appendRsvpRow(data: {
     });
   }
 
-  await sheets.spreadsheets.values.append({
+  // Write to the exact next row so columns never shift
+  const nextRow = usedRows + 1;
+  await sheets.spreadsheets.values.update({
     spreadsheetId: SPREADSHEET_ID,
-    range: "Sheet1!A:F",
+    range: `Sheet1!A${nextRow}:F${nextRow}`,
     valueInputOption: "RAW",
     requestBody: {
       values: [[
