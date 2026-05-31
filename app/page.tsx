@@ -242,27 +242,44 @@ export default function Home() {
               textAlign:"center",
               paddingTop:"clamp(3rem,14%,5rem)",paddingBottom:"clamp(1rem,4%,2rem)",
               paddingLeft:"0.5rem",paddingRight:"clamp(0.5rem,3%,1.2rem)",
-              gap:"clamp(0.1rem,0.35vw,0.25rem)",
+              gap:"clamp(0.15rem,0.5vw,0.35rem)",
             }}>
-              <p style={{ color:TAUPE,fontVariant:"small-caps",letterSpacing:"0.07em",fontSize:"clamp(0.48rem,1.3vw,0.68rem)" }}>With Gratitude to Hashem</p>
-              <p style={{ color:TAUPE,fontVariant:"small-caps",fontSize:"clamp(0.48rem,1.3vw,0.68rem)" }}>Mr. And Mrs. Moshe Baruh</p>
-              <p style={{ color:TAUPE,fontVariant:"small-caps",fontSize:"clamp(0.48rem,1.3vw,0.68rem)" }}>Mr. And Mrs. Kanter</p>
-              <p style={{ color:TAUPE,fontVariant:"small-caps",fontSize:"clamp(0.44rem,1.2vw,0.62rem)",lineHeight:1.5,marginTop:"0.15rem" }}>
+              <p style={{ color:TAUPE,fontVariant:"small-caps",letterSpacing:"0.07em",fontSize:"clamp(0.7rem,1.8vw,0.95rem)" }}>With Gratitude to Hashem</p>
+              <p style={{ color:TAUPE,fontVariant:"small-caps",fontSize:"clamp(0.7rem,1.8vw,0.95rem)" }}>Mr. And Mrs. Moshe Baruh</p>
+              <p style={{ color:TAUPE,fontVariant:"small-caps",fontSize:"clamp(0.7rem,1.8vw,0.95rem)" }}>Mr. And Mrs. Kanter</p>
+              <p style={{ color:TAUPE,fontVariant:"small-caps",fontSize:"clamp(0.65rem,1.6vw,0.85rem)",lineHeight:1.6,marginTop:"0.2rem" }}>
                 Request the honor of your presence<br />at the marriage of their children
               </p>
-              <p className={script.className} style={{ color:TAUPE,fontSize:"clamp(1.7rem,5.5vw,3rem)",lineHeight:1.1,marginTop:"0.1rem" }}>Leo &amp; Liora</p>
-              <p style={{ color:TAUPE,fontVariant:"small-caps",fontSize:"clamp(0.48rem,1.3vw,0.68rem)",marginTop:"0.2rem" }}>Thursday, August 13, 2026</p>
-              <p style={{ color:TAUPE,fontVariant:"small-caps",fontSize:"clamp(0.44rem,1.2vw,0.62rem)",lineHeight:1.5 }}>
+              <p className={script.className} style={{ color:TAUPE,fontSize:"clamp(2.2rem,7vw,3.8rem)",lineHeight:1.1,marginTop:"0.15rem" }}>Leo &amp; Liora</p>
+              <p style={{ color:TAUPE,fontVariant:"small-caps",fontSize:"clamp(0.7rem,1.8vw,0.95rem)",marginTop:"0.25rem" }}>Thursday, August 13, 2026</p>
+              <p style={{ color:TAUPE,fontVariant:"small-caps",fontSize:"clamp(0.65rem,1.6vw,0.85rem)",lineHeight:1.6 }}>
                 Chuppah at Six in the Evening,<br />Reception to Follow
               </p>
-              <p style={{ color:TAUPE,fontVariant:"small-caps",fontSize:"clamp(0.44rem,1.2vw,0.62rem)" }}>Shul of Bal Harbour</p>
+              <p style={{ color:TAUPE,fontVariant:"small-caps",fontSize:"clamp(0.65rem,1.6vw,0.85rem)" }}>Shul of Bal Harbour</p>
             </div>
-            <div style={{ position:"absolute",bottom:10,left:12,color:TAUPE,fontVariant:"small-caps",letterSpacing:"0.06em",fontSize:"clamp(0.42rem,1.1vw,0.6rem)" }}>
+            <div style={{ position:"absolute",bottom:12,left:14,color:TAUPE,fontVariant:"small-caps",letterSpacing:"0.06em",fontSize:"clamp(0.6rem,1.4vw,0.78rem)" }}>
               Black Tie
             </div>
           </div>
         )}
       </div>
+
+      {/* ── APPLE MUSIC PLAYER ── */}
+      {cardVisible && (
+        <div className="fade-up" style={{ width:"min(580px,92vw)", marginTop:"1.5rem", animationDelay:"0.6s" }}>
+          <p style={{ textAlign:"center", color:TAUPE, fontVariant:"small-caps", fontSize:"0.72rem", letterSpacing:"0.12em", marginBottom:"0.75rem" }}>
+            ✦ &nbsp; Our Song &nbsp; ✦
+          </p>
+          <iframe
+            allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+            frameBorder="0"
+            height="175"
+            style={{ width:"100%", overflow:"hidden", borderRadius:0, border:`1px solid ${TAUPE_LIGHT}` }}
+            sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+            src="https://embed.music.apple.com/us/album/1885844174?i=1885844177"
+          />
+        </div>
+      )}
 
       {/* ── WEDDING WEBSITE SECTIONS ── */}
       {cardVisible && (
@@ -284,12 +301,12 @@ export default function Home() {
                   border:`1px solid ${TAUPE_LIGHT}`,
                 }}>
                   <div style={{ minWidth:90,textAlign:"right" }}>
-                    <p style={{ color:TAUPE,fontVariant:"small-caps",fontSize:"0.72rem",letterSpacing:"0.08em" }}>{ev.time}</p>
+                    <p style={{ color:TAUPE,fontVariant:"small-caps",fontSize:"0.95rem",letterSpacing:"0.08em" }}>{ev.time}</p>
                   </div>
                   <div style={{ width:1,backgroundColor:TAUPE_LIGHT,alignSelf:"stretch" }} />
                   <div>
-                    <p style={{ color:TAUPE_DARK,fontVariant:"small-caps",letterSpacing:"0.08em",fontSize:"0.85rem",marginBottom:"0.3rem" }}>{ev.title}</p>
-                    <p style={{ color:TAUPE,fontSize:"0.85rem",lineHeight:1.6,whiteSpace:"pre-line" }}>{ev.desc}</p>
+                    <p style={{ color:TAUPE_DARK,fontVariant:"small-caps",letterSpacing:"0.08em",fontSize:"1.05rem",marginBottom:"0.35rem" }}>{ev.title}</p>
+                    <p style={{ color:TAUPE,fontSize:"1rem",lineHeight:1.7,whiteSpace:"pre-line" }}>{ev.desc}</p>
                   </div>
                 </div>
               ))}
@@ -299,7 +316,7 @@ export default function Home() {
           {/* ── HOTELS ── */}
           <div ref={hotelsRef} style={{ ...sectionWrap, borderTop:`1px solid ${TAUPE_LIGHT}` }}>
             <SectionHeading>Hotels</SectionHeading>
-            <p style={{ textAlign:"center",color:TAUPE,fontSize:"0.9rem",marginBottom:"2rem",fontStyle:"italic" }}>
+            <p style={{ textAlign:"center",color:TAUPE,fontSize:"1.05rem",marginBottom:"2rem",fontStyle:"italic" }}>
               We recommend the following hotels near the Shul of Bal Harbour.
             </p>
             <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(260px,1fr))",gap:"1.25rem" }}>
@@ -327,10 +344,10 @@ export default function Home() {
                   backgroundColor:CREAM,border:`1px solid ${TAUPE_LIGHT}`,
                   padding:"1.5rem",boxShadow:"0 4px 16px rgba(0,0,0,0.07)",
                 }}>
-                  <p style={{ color:TAUPE,fontSize:"0.62rem",fontVariant:"small-caps",letterSpacing:"0.1em",marginBottom:"0.4rem" }}>{h.tier}</p>
-                  <p style={{ color:TAUPE_DARK,fontVariant:"small-caps",fontSize:"0.9rem",letterSpacing:"0.05em",marginBottom:"0.5rem" }}>{h.name}</p>
-                  <p style={{ color:TAUPE,fontSize:"0.82rem",lineHeight:1.6,whiteSpace:"pre-line",marginBottom:"0.6rem" }}>{h.address}</p>
-                  <p style={{ color:TAUPE_LIGHT,fontSize:"0.75rem",fontStyle:"italic" }}>{h.note}</p>
+                  <p style={{ color:TAUPE,fontSize:"0.75rem",fontVariant:"small-caps",letterSpacing:"0.1em",marginBottom:"0.4rem" }}>{h.tier}</p>
+                  <p style={{ color:TAUPE_DARK,fontVariant:"small-caps",fontSize:"1.05rem",letterSpacing:"0.05em",marginBottom:"0.5rem" }}>{h.name}</p>
+                  <p style={{ color:TAUPE,fontSize:"0.95rem",lineHeight:1.7,whiteSpace:"pre-line",marginBottom:"0.6rem" }}>{h.address}</p>
+                  <p style={{ color:TAUPE_LIGHT,fontSize:"0.88rem",fontStyle:"italic" }}>{h.note}</p>
                 </div>
               ))}
             </div>
@@ -382,7 +399,7 @@ export default function Home() {
           {/* ── RSVP ── */}
           <div ref={rsvpRef} style={{ ...sectionWrap, borderTop:`1px solid ${TAUPE_LIGHT}` }}>
             <SectionHeading>RSVP</SectionHeading>
-            <p style={{ textAlign:"center",color:TAUPE,fontSize:"0.85rem",fontStyle:"italic",marginBottom:"2rem" }}>
+            <p style={{ textAlign:"center",color:TAUPE,fontSize:"1rem",fontStyle:"italic",marginBottom:"2rem" }}>
               Kindly reply by July 1, 2026
             </p>
 
@@ -502,11 +519,11 @@ function FaqItem({ q, a }: { q: string; a: string }) {
           cursor: "pointer", textAlign: "left", fontFamily: "inherit",
         }}
       >
-        <span style={{ color: TAUPE_DARK, fontVariant: "small-caps", letterSpacing: "0.06em", fontSize: "0.85rem" }}>{q}</span>
+        <span style={{ color: TAUPE_DARK, fontVariant: "small-caps", letterSpacing: "0.06em", fontSize: "1rem" }}>{q}</span>
         <span style={{ color: TAUPE, fontSize: "1.1rem", transition: "transform 0.2s", transform: open ? "rotate(45deg)" : "rotate(0deg)" }}>+</span>
       </button>
       {open && (
-        <div style={{ padding: "0 1.5rem 1.1rem", color: TAUPE, fontSize: "0.88rem", lineHeight: 1.7, whiteSpace: "pre-line" }}>
+        <div style={{ padding: "0 1.5rem 1.1rem", color: TAUPE, fontSize: "1rem", lineHeight: 1.8, whiteSpace: "pre-line" }}>
           {a}
         </div>
       )}
