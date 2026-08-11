@@ -31,7 +31,7 @@ export async function appendRsvpRow(data: {
   // Write header row if sheet is empty
   const colA = await sheets.spreadsheets.values.get({
     spreadsheetId: SPREADSHEET_ID,
-    range: "Sheet1!A:A",
+    range: "RSVP!A:A",
   });
 
   const usedRows = colA.data.values?.length || 0;
@@ -39,7 +39,7 @@ export async function appendRsvpRow(data: {
   if (usedRows === 0) {
     await sheets.spreadsheets.values.update({
       spreadsheetId: SPREADSHEET_ID,
-      range: "Sheet1!A1:F1",
+      range: "RSVP!A1:F1",
       valueInputOption: "RAW",
       requestBody: {
         values: [["Name", "Attending", "Party Size", "Email", "Phone", "Song Request", "Advice", "Submitted At"]],
@@ -51,7 +51,7 @@ export async function appendRsvpRow(data: {
   const nextRow = usedRows + 1;
   await sheets.spreadsheets.values.update({
     spreadsheetId: SPREADSHEET_ID,
-    range: `Sheet1!A${nextRow}:H${nextRow}`,
+    range: `RSVP!A${nextRow}:H${nextRow}`,
     valueInputOption: "RAW",
     requestBody: {
       values: [[
