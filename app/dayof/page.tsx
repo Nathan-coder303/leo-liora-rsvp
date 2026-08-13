@@ -226,14 +226,12 @@ export default function DayOfPage() {
       </div>
 
       <div style={{ maxWidth:900, margin:"0 auto" }}>
-        {/* Tabs */}
+        {/* Tabs — Send and Day Of only. Guests, Budget, Baruh and Calendar are
+            deliberately not linked here: this page is used on the day itself,
+            where a mis-tap into another list is a distraction. */}
         <div style={{ display:"flex", gap:"0.5rem", marginBottom:"1.5rem", flexWrap:"wrap" }}>
-          {tab("Guests", "/guests", false)}
           {tab("Send",   "/send-it", false)}
-          {tab("Budget", "/budget", false)}
-          {tab("Baruh",  "/baruh", false)}
           {tab("Day Of", "/dayof", true)}
-          {tab("Calendar", "/calendar", false)}
         </div>
 
         {/* Composer window */}
