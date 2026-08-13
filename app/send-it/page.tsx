@@ -85,7 +85,9 @@ export default function SendPage() {
   const [cycleFilter,    setCycleFilter]    = useState<CycleFilter>("all");
   const [responseFilter, setResponseFilter] = useState<ResponseFilter>("not-opened");
   // Who invited them. Blank counts as "Baruh", matching the /baruh page.
-  const [hostFilter, setHostFilter] = useState<string>("all");
+  // Defaults to Baruh: this tab is the Baruh list now, with everyone else on
+  // /others. Switch the dropdown to see another host.
+  const [hostFilter, setHostFilter] = useState<string>("Baruh");
   /** Hosts present in the sheet, with their live guest counts. Baruh first. */
   const hosts = useMemo(() => {
     const m = new Map<string, number>();
@@ -586,6 +588,7 @@ export default function SendPage() {
           {tab("Send",   "/send-it", true)}
           {tab("Budget", "/budget", false)}
           {tab("Baruh",  "/baruh", false)}
+          {tab("Others", "/others", false)}
           {tab("Calendar", "/calendar", false)}
         </div>
 
@@ -791,8 +794,8 @@ export default function SendPage() {
               </span>
             )}
           </span>
-          {(cycleFilter !== "all" || responseFilter !== "not-opened" || hostFilter !== "all" || sortKey !== "name") && (
-            <button onClick={() => { setCycleFilter("all"); setResponseFilter("not-opened"); setHostFilter("all"); setSortKey("name"); }}
+          {(cycleFilter !== "all" || responseFilter !== "not-opened" || hostFilter !== "Baruh" || sortKey !== "name") && (
+            <button onClick={() => { setCycleFilter("all"); setResponseFilter("not-opened"); setHostFilter("Baruh"); setSortKey("name"); }}
               style={{ background:"transparent", color:GOLD_DIM, border:"none", cursor:"pointer",
                 fontSize:"0.7rem", fontStyle:"italic", padding:0, textDecoration:"underline" }}>
               reset filters

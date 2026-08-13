@@ -180,6 +180,7 @@ export default function CalendarPage() {
           {tab("Send",   "/send-it", false)}
           {tab("Budget", "/budget", false)}
           {tab("Baruh",  "/baruh", false)}
+          {tab("Others", "/others", false)}
           {tab("Calendar", "/calendar", true)}
         </div>
 
