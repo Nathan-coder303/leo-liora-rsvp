@@ -13,7 +13,7 @@ const DARK     = "#111008";
 const BLACK    = "#080808";
 
 const SITE_BASE = "https://leo-liora-rsvp.vercel.app";
-const MSG_KEY   = "leo-liora-others-message";
+const MSG_KEY   = "leo-liora-dayof-message";
 const DEFAULT_MSG =
   `Hi {name}! 💍\nWe can't wait to celebrate Leo & Liora's wedding with you.\n\nDetails & RSVP: {link}`;
 
@@ -39,7 +39,7 @@ function displayPhone(p: string): string {
   return digits.length > 10 ? `+${digits}` : digits;
 }
 
-export default function OthersPage() {
+export default function DayOfPage() {
   const [guests,  setGuests]  = useState<Guest[]>([]);
   const [loading, setLoading] = useState(true);
   const [error,   setError]   = useState("");
@@ -221,7 +221,7 @@ export default function OthersPage() {
 
       <div style={{ maxWidth:900, margin:"0 auto 1.25rem" }}>
         <p className={display.className} style={{ fontSize:"clamp(1.1rem,3.5vw,1.8rem)", letterSpacing:"0.15em", marginBottom:"0.25rem" }}>LEO &amp; LIORA</p>
-        <p style={{ color:GOLD_DIM, fontSize:"0.75rem", letterSpacing:"0.1em", fontVariant:"small-caps" }}>Everyone Else · compose &amp; send</p>
+        <p style={{ color:GOLD_DIM, fontSize:"0.75rem", letterSpacing:"0.1em", fontVariant:"small-caps" }}>Day Of · compose &amp; send</p>
         <div style={{ height:1, backgroundColor:GOLD_DIM, opacity:0.25, marginTop:"0.9rem" }} />
       </div>
 
@@ -232,7 +232,7 @@ export default function OthersPage() {
           {tab("Send",   "/send-it", false)}
           {tab("Budget", "/budget", false)}
           {tab("Baruh",  "/baruh", false)}
-          {tab("Others", "/others", true)}
+          {tab("Day Of", "/dayof", true)}
           {tab("Calendar", "/calendar", false)}
         </div>
 

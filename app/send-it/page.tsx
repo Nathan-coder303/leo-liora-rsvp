@@ -86,7 +86,7 @@ export default function SendPage() {
   const [responseFilter, setResponseFilter] = useState<ResponseFilter>("not-opened");
   // Who invited them. Blank counts as "Baruh", matching the /baruh page.
   // Defaults to Baruh: this tab is the Baruh list now, with everyone else on
-  // /others. Switch the dropdown to see another host.
+  // /dayof. Switch the dropdown to see another host.
   const [hostFilter, setHostFilter] = useState<string>("Baruh");
   /** Hosts present in the sheet, with their live guest counts. Baruh first. */
   const hosts = useMemo(() => {
@@ -588,7 +588,7 @@ export default function SendPage() {
           {tab("Send",   "/send-it", true)}
           {tab("Budget", "/budget", false)}
           {tab("Baruh",  "/baruh", false)}
-          {tab("Others", "/others", false)}
+          {tab("Day Of", "/dayof", false)}
           {tab("Calendar", "/calendar", false)}
         </div>
 

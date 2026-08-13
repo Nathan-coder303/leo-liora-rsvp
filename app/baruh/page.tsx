@@ -230,7 +230,7 @@ export default function BaruhPage() {
           {tab("Send",   "/send-it", false)}
           {tab("Budget", "/budget", false)}
           {tab("Baruh",  "/baruh", true)}
-          {tab("Others", "/others", false)}
+          {tab("Day Of", "/dayof", false)}
           {tab("Calendar", "/calendar", false)}
         </div>
 
